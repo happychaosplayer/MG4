@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _incorrectUI;
     [SerializeField] private float _incorrectBackwardsMovement;
     [SerializeField] private AudioSource _audio;
+    private FloatAnimation _stop;
 
     private GameObject _currentFood;
     private EquationType _currentEquationType;
@@ -61,6 +62,10 @@ public class Player : MonoBehaviour
         // To do so, GET the FloatAnimation Component on the GameObject we
         //      collided with, and CALL the StopAnimation method on this
         //      Component.
+
+        _stop = other.gameObject.GetComponent<FloatAnimation>();
+        _stop.StopAnimation();
+
         //
         // Feature 5 of the rubric should work after this.
 
@@ -81,15 +86,15 @@ public class Player : MonoBehaviour
             {
                 case EquationType.Add:
                     // UNCOMMENT AFTER STEP 3
-                    //correct = CheckIfAdditionCorrect(number);
+                    correct = CheckIfAdditionCorrect(number);
                     break;
                 case EquationType.Subtract:
                     // UNCOMMENT AFTER STEP 4
-                    //correct = CheckIfSubtractionCorrect(number);
+                    correct = CheckIfSubtractionCorrect(number);
                     break;
                 case EquationType.Multiply:
                     // UNCOMMENT AFTER STEP 5
-                    //correct = CheckIfMultiplicationCorrect(number);
+                    correct = CheckIfMultiplicationCorrect(number);
                     break;
             }
         }
@@ -116,6 +121,17 @@ public class Player : MonoBehaviour
         _currentFood = null;
     }
 
+    private bool CheckIfAdditionCorrect(int integer)
+    {
+        if(_number1 + _number2 == integer)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     // STEP 3 -----------------------------------------------------------------
     // Write a method named CheckIfAdditionCorrect to check if the answer a player
     //      gave for an addition question was correct or not.
@@ -138,8 +154,6 @@ public class Player : MonoBehaviour
     // Feature 4 of the rubric should work after you finish all of the 3 methods
     //      in this file.
 
-    // private ??? CheckIfAdditionCorrect (??? ???)
-
     // STEP 3 -----------------------------------------------------------------
 
 
@@ -154,11 +168,19 @@ public class Player : MonoBehaviour
     // After you write this method, uncomment the line above that says
     //      "UNCOMMENT AFTER STEP 4".
 
-    // private ??? CheckIfSubtractionCorrect (??? ???)
+    private bool CheckIfSubtractionCorrect (int integer)
+    {
+        if (_number1 - _number2 == integer)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     // STEP 4 -----------------------------------------------------------------
-
-
 
     // STEP 5 -----------------------------------------------------------------
     // Write a method named CheckIfMultiplicationCorrect that works almost exactly
@@ -170,7 +192,17 @@ public class Player : MonoBehaviour
     // After you write this method, uncomment the line above that says
     //      "UNCOMMENT AFTER STEP 5".
 
-    // private ??? CheckIfMultiplicationCorrect (??? ???)
+    private bool CheckIfMultiplicationCorrect (int integer)
+    {
+        if (_number1 * _number2 == integer)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     // STEP 5 -----------------------------------------------------------------
 
